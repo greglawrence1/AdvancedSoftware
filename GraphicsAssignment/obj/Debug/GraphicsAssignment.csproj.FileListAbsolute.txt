@@ -1,0 +1,10 @@
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\bin\Debug\GraphicsAssignment.exe.config
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\bin\Debug\GraphicsAssignment.exe
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\bin\Debug\GraphicsAssignment.pdb
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.csproj.AssemblyReference.cache
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.Form1.resources
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.Properties.Resources.resources
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.csproj.GenerateResource.cache
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.csproj.CoreCompileInputs.cache
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.exe
+C:\Users\greg_\Documents\projects\GraphicsAssignment\GraphicsAssignment\obj\Debug\GraphicsAssignment.pdb

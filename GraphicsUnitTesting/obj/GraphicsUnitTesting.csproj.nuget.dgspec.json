@@ -4,6 +4,21 @@
     "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsUnitTesting\\GraphicsUnitTesting.csproj": {}
   },
   "projects": {
+    "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsAssignment\\GraphicsAssignment.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsAssignment\\GraphicsAssignment.csproj",
+        "projectName": "GraphicsAssignment",
+        "projectPath": "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsAssignment\\GraphicsAssignment.csproj",
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsUnitTesting\\GraphicsUnitTesting.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -31,7 +46,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsAssignment\\GraphicsAssignment.csproj": {
+                "projectPath": "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\GraphicsAssignment\\GraphicsAssignment.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
