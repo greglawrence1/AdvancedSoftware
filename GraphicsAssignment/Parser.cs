@@ -82,6 +82,11 @@ namespace GraphicsAssignment
                 Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
                 t.draw(g);
             }
+            if (commands[0] == "clear")
+            {
+                Clear clear = new Clear(g);
+                clear.ClearImage();
+            }
         }
     }
 }
