@@ -11,10 +11,12 @@ namespace GraphicsAssignment
     {
         Graphics g;
         private bool Fill;
+        private DrawTo h;
 
         public Parser(Graphics g)
         {
             this.g = g;
+            h = new DrawTo(0, 0);
         }
         public bool Filled
         {
@@ -86,6 +88,12 @@ namespace GraphicsAssignment
             {
                 Clear clear = new Clear(g);
                 clear.ClearImage();
+            }
+            if (commands[0] == "drawto")
+            {
+                int i = int.Parse(commands[1]);
+                int f = int.Parse(commands[2]);
+                h.drawTo(g, i, f);
             }
         }
     }
