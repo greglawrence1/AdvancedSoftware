@@ -18,6 +18,7 @@ namespace GraphicsAssignment
         public Form1()
         {
             InitializeComponent();
+            bitmapG = Graphics.FromImage(myBitmap);
             parser = new Parser(bitmapG);
         }
 
@@ -31,7 +32,8 @@ namespace GraphicsAssignment
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-
+            Graphics g = e.Graphics;
+            g.DrawImageUnscaled(myBitmap, 0, 0);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
