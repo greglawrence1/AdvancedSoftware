@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,22 @@ namespace GraphicsAssignment
                 parser.parserCommand(richText);
                 pictureBox1.Refresh();
             }
+        }
+
+        private void Open_Button_Click(object sender, EventArgs e)
+        {
+            String file = @"C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\mytext.txt";
+            TextReader txt = File.OpenText(file);
+            String txt1 = txt.ReadToEnd();
+            richTextBox1.Text = txt1;
+        }
+
+        private void Save_Button_Click(object sender, EventArgs e)
+        {
+            TextWriter txt = new StreamWriter("C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\mytext.txt");
+            txt.Write(richTextBox1.Text);
+            txt.Close();
+            richTextBox1.Clear();
         }
     }
 }

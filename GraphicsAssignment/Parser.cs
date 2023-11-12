@@ -60,11 +60,17 @@ namespace GraphicsAssignment
             }
             if (commands[0] == "circle")
             {
-                int i = int.Parse(commands[1]);
-                int f = int.Parse(commands[2]);
-                int e = int.Parse(commands[3]);
-                Circle c = new Circle(Color.Blue, i, f, e, Filled);
-                c.draw(g);
+                try
+                {
+                    int i = int.Parse(commands[1]);
+                    int f = int.Parse(commands[2]);
+                    int e = int.Parse(commands[3]);
+                    Circle c = new Circle(Color.Blue, i, f, e, Filled);
+                    c.draw(g);
+                } catch (FormatException) 
+                {
+                    Console.WriteLine("You Need to insert a Number in Circle");
+                }
             }
             if (commands[0] == "rectangle")
             {

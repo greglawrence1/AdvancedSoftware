@@ -55,6 +55,7 @@
             this.Open_Button.TabIndex = 1;
             this.Open_Button.Text = "Open";
             this.Open_Button.UseVisualStyleBackColor = true;
+            this.Open_Button.Click += new System.EventHandler(this.Open_Button_Click);
             // 
             // Save_Button
             // 
@@ -64,6 +65,7 @@
             this.Save_Button.TabIndex = 2;
             this.Save_Button.Text = "Save";
             this.Save_Button.UseVisualStyleBackColor = true;
+            this.Save_Button.Click += new System.EventHandler(this.Save_Button_Click);
             // 
             // textBox1
             // 
