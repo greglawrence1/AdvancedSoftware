@@ -50,18 +50,30 @@ namespace GraphicsAssignment
 
         private void Open_Button_Click(object sender, EventArgs e)
         {
-            String file = @"C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\mytext.txt";
-            TextReader txt = File.OpenText(file);
-            String txt1 = txt.ReadToEnd();
-            richTextBox1.Text = txt1;
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = @"C:\Users\greg_\Documents\projects\GraphicsAssignment";
+            if(open.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = open.FileName;
+
+                string txt = File.ReadAllText(filePath);
+
+                richTextBox1.Text = txt;
+            }
         }
 
         private void Save_Button_Click(object sender, EventArgs e)
         {
-            TextWriter txt = new StreamWriter("C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\mytext.txt");
-            txt.Write(richTextBox1.Text);
-            txt.Close();
-            richTextBox1.Clear();
+            SaveFileDialog save = new SaveFileDialog();
+
+            save.InitialDirectory = @"C:\Users\greg_\Documents\projects\GraphicsAssignment";
+            save.DefaultExt = "txt";
+            if(save.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = save.FileName;
+                File.WriteAllText(filePath, richTextBox1.Text);
+                richTextBox1.Clear();
+            }
         }
     }
 }

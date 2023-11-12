@@ -28,6 +28,20 @@ namespace GraphicsUnitTesting
             Assert.AreEqual(y, 20);
             Assert.AreEqual(radius, 5);
         }
+        [TestMethod]
+        public void Circle_ShouldThrowFormatException()
+        {
+            // Arrange
+            Color color = Color.Red;
+            int x = 10;
+            int y = -20;
+            int radius = 5;
+            // Act
+            Circle circle = new Circle(color, x, y, radius, true);
 
-    }
+
+            // Act and assert
+            Assert.AreNotEqual(y, -20);
+            }
+        }
 }
