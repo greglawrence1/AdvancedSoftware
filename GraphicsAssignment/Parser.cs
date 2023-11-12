@@ -64,6 +64,15 @@ namespace GraphicsAssignment
                 Circle c = new Circle(Color.Blue, i, f, e, Filled);
                 c.draw(g);
             }
+            if (commands[0] == "rectangle")
+            {
+                int q1 = int.Parse(commands[1]);
+                int q2 = int.Parse(commands[2]);
+                int q3 = int.Parse(commands[3]);
+                int q4 = int.Parse(commands[4]);
+                Rectangle r = new Rectangle(Color.AliceBlue, q1, q2, q3, q4, Filled);
+                r.draw(g);
+            }
         }
     }
 }
