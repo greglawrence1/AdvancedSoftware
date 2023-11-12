@@ -74,21 +74,34 @@ namespace GraphicsAssignment
             }
             if (commands[0] == "rectangle")
             {
-                int q1 = int.Parse(commands[1]);
-                int q2 = int.Parse(commands[2]);
-                int q3 = int.Parse(commands[3]);
-                int q4 = int.Parse(commands[4]);
-                Rectangle r = new Rectangle(Color.AliceBlue, q1, q2, q3, q4, Filled);
-                r.draw(g);
+                try
+                {
+                    int q1 = int.Parse(commands[1]);
+                    int q2 = int.Parse(commands[2]);
+                    int q3 = int.Parse(commands[3]);
+                    int q4 = int.Parse(commands[4]);
+                    Rectangle r = new Rectangle(Color.AliceBlue, q1, q2, q3, q4, Filled);
+                    r.draw(g);
+                } catch(FormatException) 
+                {
+                    Console.WriteLine("You need to insert numbers for your Rectangle");
+                }
             }
             if (commands[0] == "triangle")
             {
-                int t1 = int.Parse(commands[1]);
-                int t2 = int.Parse(commands[2]);
-                int t3 = int.Parse(commands[3]);
+                try
+                {
+                    int t1 = int.Parse(commands[1]);
+                    int t2 = int.Parse(commands[2]);
+                    int t3 = int.Parse(commands[3]);
 
-                Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
-                t.draw(g);
+                    Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
+                    t.draw(g);
+                }
+                catch (FormatException) 
+                {
+                    Console.WriteLine("You need to insert numbers for your triangle");
+                }
             }
             if (commands[0] == "clear")
             {
@@ -97,9 +110,26 @@ namespace GraphicsAssignment
             }
             if (commands[0] == "drawto")
             {
-                int i = int.Parse(commands[1]);
-                int f = int.Parse(commands[2]);
-                h.drawTo(g, i, f);
+                try
+                {
+                    int i = int.Parse(commands[1]);
+                    int f = int.Parse(commands[2]);
+                    h.drawTo(g, i, f);
+                }
+                catch (FormatException) 
+                {
+                   Console.WriteLine("You need to insert numbers following your drawline");
+                }
+            }
+            if (commands[0] == "moveto")
+            {
+                int m1 = int.Parse(commands[1]);
+                int m2 = int.Parse(commands[2]);
+                MoveTo m = new MoveTo(m1, m2);
+                Cursor c = new Cursor();
+                m.moveTo(g, m1, m2);
+                c.ClearPreviousCursor(g);
+                              
             }
         }
     }
