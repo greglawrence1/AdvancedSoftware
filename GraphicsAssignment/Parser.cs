@@ -21,6 +21,15 @@ namespace GraphicsAssignment
             get { return Fill; }
             set { Fill = value; }
         }
+
+        public void parserCommand(string commands)
+        {
+            String[] commandList = commands.Split('\n');
+            for (int i = 0; i < commandList.Length; i++)
+            {
+                parseCommand(commandList[i]);
+            }
+        }
         public void parseCommand(string command)
         {
             command.Trim().ToLower();
