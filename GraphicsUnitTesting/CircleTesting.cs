@@ -29,7 +29,7 @@ namespace GraphicsUnitTesting
             Assert.AreEqual(radius, 5);
         }
         [TestMethod]
-        public void Circle_ShouldThrowFormatException()
+        public void Circle_ShouldntThrowException()
         {
             // Arrange
             Color color = Color.Red;
