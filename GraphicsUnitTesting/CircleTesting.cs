@@ -34,14 +34,21 @@ namespace GraphicsUnitTesting
             // Arrange
             Color color = Color.Red;
             int x = 10;
-            int y = -20;
+            int y = 200000;
             int radius = 5;
-            // Act
-            Circle circle = new Circle(color, x, y, radius, true);
-
-
-            // Act and assert
-            Assert.AreNotEqual(y, -20);
+            bool fill = true;
+ 
+            try
+            {
+                //Act
+                Circle circle = new Circle(color, x, y, radius, fill);            
+               
+            }
+            catch (Exception) 
+            {
+                //Assert
+                Assert.Fail("Shouldn't be an Exception");
+            }
             }
         }
 }

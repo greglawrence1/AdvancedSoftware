@@ -19,23 +19,25 @@ namespace GraphicsAssignment
         }
         public override void draw(Graphics g)
         {
-            if (x > 0 && x < 640 && y > 0 && y < 640 && radius > 0 && radius < 30)
-            {
-                Pen p = new Pen(Color.Black, 2);
-                SolidBrush b = new SolidBrush(colour);
-                if (fill)
+            
+                if (x > 0 && x < 640 && y > 0 && y < 640 && radius > 0 && radius < 30)
                 {
-                    g.FillEllipse(b, x, y, radius * 2, radius * 2);
+                    Pen p = new Pen(Color.Black, 2);
+                    SolidBrush b = new SolidBrush(colour);
+                    if (fill)
+                    {
+                        g.FillEllipse(b, x, y, radius * 2, radius * 2);
+                    }
+                    else
+                    {
+                        g.DrawEllipse(p, x, y, radius * 2, radius * 2);
+                    }
                 }
-                else
+                else 
                 {
-                    g.DrawEllipse(p, x, y, radius * 2, radius * 2);
+                Console.WriteLine("Numbers are out of Range");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Your numbers are out of range");
-            }
+
         }
 
         public override string ToString() //all classes inherit from object and ToString() is abstract in object
