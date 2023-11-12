@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsAssignment", "GraphicsAssignment\GraphicsAssignment.csproj", "{8ECAD8B9-BCCC-4CAF-9C78-14E3ED32948E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsUnitTesting", "GraphicsUnitTesting\GraphicsUnitTesting.csproj", "{BD43C503-12E9-4994-874D-29B3E5317F09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8ECAD8B9-BCCC-4CAF-9C78-14E3ED32948E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ECAD8B9-BCCC-4CAF-9C78-14E3ED32948E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ECAD8B9-BCCC-4CAF-9C78-14E3ED32948E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD43C503-12E9-4994-874D-29B3E5317F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD43C503-12E9-4994-874D-29B3E5317F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD43C503-12E9-4994-874D-29B3E5317F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD43C503-12E9-4994-874D-29B3E5317F09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

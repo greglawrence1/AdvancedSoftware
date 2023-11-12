@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace GraphicsAssignment
 {
-    internal class ValidateCommands
+    public class ValidateCommands
     {
+        private String[] ACCEPTED_COMMANDS =
+        {"reset", "clear", "circle", "rectangle", "triangle"
+            , "drawto", "moveto", "fillon", "filloff"};
+
+        public ValidateCommands()
+        {
+
+        }
+
+
+        public bool IsAcceptedCommand(String command)
+        {
+            bool valid = ACCEPTED_COMMANDS.Any(c => c.Equals(command));
+
+            return valid;
+        }
     }
 }
