@@ -7,23 +7,35 @@ using System.Drawing;
 
 namespace GraphicsAssignment
 {
+    /// <summary>
+    /// This is the class for parsing my commands
+    /// </summary>
     public class Parser
     {
         Graphics g;
         private bool Fill;
         private DrawTo h;
-
+        /// <summary>
+        /// Initializes the parser class
+        /// </summary>
+        /// <param name="g"> the graphic used for drawing</param>
         public Parser(Graphics g)
         {
             this.g = g;
             h = new DrawTo(0, 0);
         }
+        /// <summary>
+        /// Dictates Whether Shapes should be filled by getting a value of true or false
+        /// </summary>
         public bool Filled
         {
             get { return Fill; }
             set { Fill = value; }
         }
-
+        /// <summary>
+        /// Parses the commands
+        /// </summary>
+        /// <param name="commands">what gets parsed and is split when a new line occurs</param>
         public void parserCommand(string commands)
         {
             String[] commandList = commands.Split('\n');
@@ -32,6 +44,10 @@ namespace GraphicsAssignment
                 parseCommand(commandList[i]);
             }
         }
+        /// <summary>
+        /// Parses a single command
+        /// </summary>
+        /// <param name="command">command gets parsed split with a space</param>
         public void parseCommand(string command)
         {
             command.Trim().ToLower();
