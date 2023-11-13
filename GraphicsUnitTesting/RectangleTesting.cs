@@ -8,11 +8,17 @@ using GraphicsAssignment;
 
 namespace GraphicsUnitTesting
 {
+    /// <summary>
+    /// A test class for testing the rectangle class 
+    /// </summary>
     [TestClass]
     public class RectangleTesting
     {
+        /// <summary>
+        /// Test whether the rectangle class sets properties correctly
+        /// </summary>
         [TestMethod]
-        public void RectanleSetsPropertiesCorrectly()
+        public void RectangleSetsPropertiesCorrectly()
         {
             // Arrange
             Color color = Color.Red;
@@ -32,6 +38,9 @@ namespace GraphicsUnitTesting
             Assert.AreEqual(width, 10);
             Assert.AreEqual(fill, true);
         }
+        /// <summary>
+        /// Tests whether an exception should be thrown when it should be handled already
+        /// </summary>
         [TestMethod]
         public void Rectangle_ShouldntThrowException()
         {
