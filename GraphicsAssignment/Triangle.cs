@@ -38,13 +38,20 @@ namespace GraphicsAssignment
         {
             Pen p = new Pen(Color.Black, 2);
             SolidBrush b = new SolidBrush(colour);
-            if (fill)
+            if (x > 0 && x < 640 && y > 0 && y < 640 && z > 0 && z < 480)
             {
-                g.FillPolygon(b, new Point[] { new Point(x, y), new Point(y, z), new Point(z, x) });
+                if (fill)
+                {
+                    g.FillPolygon(b, new Point[] { new Point(x, y), new Point(y, z), new Point(z, x) });
+                }
+                else
+                {
+                    g.DrawPolygon(p, new Point[] { new Point(x, y), new Point(y, z), new Point(z, x) });
+                }
             }
             else
             {
-                g.DrawPolygon(p, new Point[] { new Point(x, y), new Point(y, z), new Point(z, x) });
+                Console.WriteLine("Numbers are out of Range");
             }
         }
     }
