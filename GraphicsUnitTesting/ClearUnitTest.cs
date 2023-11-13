@@ -14,6 +14,8 @@ namespace GraphicsUnitTesting
         [TestMethod]
         public void ClearImage_Seeifitisthesamecolour() 
         {
+            // arrange
+            
             
         }
     }
