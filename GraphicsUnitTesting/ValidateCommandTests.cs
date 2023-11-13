@@ -2,9 +2,15 @@ using GraphicsAssignment;
 
 namespace GraphicsUnitTesting
 {
+    /// <summary>
+    /// This is a test class for validating commands
+    /// </summary>
     [TestClass]
     public class ValidateCommandTests
     {
+        /// <summary>
+        /// Tests the validate commands is accepted method to see if it returns true when expected
+        /// </summary>
         [TestMethod]
         public void isAcceptedCommand_valid_returningTrue()
         {
@@ -18,7 +24,9 @@ namespace GraphicsUnitTesting
             //Assert
             Assert.IsTrue(result);
         }
-
+        /// <summary>
+        /// testing the is accepted method of the validate commands class to see if it is false
+        /// </summary>
         [TestMethod]
         public void isAcceptedCommand_invalid_returningFalse()
         {
