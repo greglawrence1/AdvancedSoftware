@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GraphicsAssignment
 {
+    /// <summary>
+    /// Represents an abstract class which other classes can inerit from to draw a shape
+    /// </summary>
     public abstract class Shape
     {
         protected Color colour;

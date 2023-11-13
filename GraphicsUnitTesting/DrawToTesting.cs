@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Moq;
 using System.Threading.Tasks;
 using GraphicsAssignment;
+
 
 namespace GraphicsUnitTesting
 {
@@ -14,8 +16,7 @@ namespace GraphicsUnitTesting
         [TestMethod]
         public void DrawTo_CorrectCoordinates() 
         {
-            DrawTo draw = new DrawTo(10, 10);
-
+            
         }
         [TestMethod]
         public void DrawTo_ShouldntThrowException()
