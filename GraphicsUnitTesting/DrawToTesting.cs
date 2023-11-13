@@ -28,7 +28,6 @@ namespace GraphicsUnitTesting
             {
                 //Act
                 DrawTo draw = new DrawTo(x, y);
-
             }
             catch (Exception)
             {

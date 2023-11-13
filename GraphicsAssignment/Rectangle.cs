@@ -24,13 +24,20 @@ namespace GraphicsAssignment
         {
             Pen p = new Pen(Color.Black, 2);
             SolidBrush b = new SolidBrush(colour);
-            if (fill)
+            if (x > 0 && x < 640 && y > 0 && y < 640 && height > 0 && height < 200 && width > 0 && width < 200)
             {
-                g.FillRectangle(b, x, y, width, height);
+                if (fill)
+                {
+                    g.FillRectangle(b, x, y, width, height);
+                }
+                else
+                {
+                    g.DrawRectangle(p, x, y, width, height);
+                }
             }
             else
             {
-                g.DrawRectangle(p, x, y, width, height);
+                Console.WriteLine("Numbers are out of Range");
             }
         }
     }
