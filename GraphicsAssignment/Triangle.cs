@@ -24,7 +24,7 @@ namespace GraphicsAssignment
         /// <param name="x">this is the first coordinate of the triangle</param>
         /// <param name="y">this is the second coordinate of the triangle</param>
         /// <param name="z">this is the third coordinate of the triangle</param>
-        /// <param name="fill">second number to compare</param>
+        /// <param name="fill">this dictates whether the triangle should be filled or not, if true then filled </param>
         public Triangle(Color colour, int x, int y, int z, bool fill) : base(colour, x, y)
         {
             this.z = z;
