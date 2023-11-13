@@ -11,18 +11,26 @@ using System.Windows.Forms;
 
 namespace GraphicsAssignment
 {
+    /// <summary>
+    /// This class is the main form for the graphics
+    /// </summary>
     public partial class Form1 : Form
     {
         Bitmap myBitmap = new Bitmap(640, 480);
         Graphics bitmapG;
         private Parser parser;
+        /// <summary>
+        /// Initialises a new instance of Form
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
             bitmapG = Graphics.FromImage(myBitmap);
             parser = new Parser(bitmapG);
         }
-
+        /// <summary>
+        /// This is what occurs when the run button is clicked
+        /// </summary>
         private void Run_Button_Click(object sender, EventArgs e)
         {
             string mytext = textBox1.Text;
@@ -30,13 +38,17 @@ namespace GraphicsAssignment
             textBox1.Clear();
             pictureBox1.Refresh();
         }
-
+        /// <summary>
+        /// The picture is painted on this picturebox
+        /// </summary>
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(myBitmap, 0, 0);
         }
-
+        /// <summary>
+        /// When text is typed into this textbox events can happen
+        /// </summary>
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (textBox1.Text == "run")
@@ -47,7 +59,9 @@ namespace GraphicsAssignment
                 pictureBox1.Refresh();
             }
         }
-
+        /// <summary>
+        /// When the open button is clicked it opens a folder
+        /// </summary>
         private void Open_Button_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -61,7 +75,9 @@ namespace GraphicsAssignment
                 richTextBox1.Text = txt;
             }
         }
-
+        /// <summary>
+        /// When the save button is clicked it saves a file in the folder with a name of your choice
+        /// </summary>
         private void Save_Button_Click(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
