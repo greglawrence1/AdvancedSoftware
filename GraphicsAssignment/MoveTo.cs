@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 namespace GraphicsAssignment
 {
+    /// <summary>
+    /// this is a class for moving the cursor around on the windows form
+    /// </summary>
     public class MoveTo
     {
-        private int startX;
-        private int startY;
         private Cursor cursor;
-
-        public MoveTo(int startX, int startY)
+        /// <summary>
+        /// this initializes the moveto class
+        /// </summary>
+        public MoveTo()
         {
-            this.startX = startX;
-            this.startY = startY;
+           
             this.cursor = new Cursor();
         }
+        /// <summary>
+        /// moves the cursor to the specificed place on the graphics
+        /// </summary>
+        /// <param name="g">the surface where the moveto is done</param>
+        /// <param name="x">the coordinate of the new x position</param>
+        /// <param name="y">the coordinate of the new y position</param>
         public void moveTo(Graphics g, int x, int y)
         {
-            startX = x;
-            startY = y;
             cursor.UpdateCursor(g, x, y);
             cursor.ClearPreviousCursor(g);
         }

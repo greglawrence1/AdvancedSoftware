@@ -141,7 +141,7 @@ namespace GraphicsAssignment
             {
                 int m1 = int.Parse(commands[1]);
                 int m2 = int.Parse(commands[2]);
-                MoveTo m = new MoveTo(m1, m2);
+                MoveTo m = new MoveTo();
                 Cursor c = new Cursor();
                 m.moveTo(g, m1, m2);
                 c.ClearPreviousCursor(g);
