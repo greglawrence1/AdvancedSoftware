@@ -8,9 +8,15 @@ using GraphicsAssignment;
 
 namespace GraphicsUnitTesting
 {
+    /// <summary>
+    /// this is the testing class to test the circle class
+    /// </summary>
     [TestClass]
     public class circleTesting
     {
+        /// <summary>
+        /// This tests whether the circle sets its properties correctly
+        /// </summary>
         [TestMethod]
         public void CircleConstructorSetsPropertiesCorrectly()
         {
@@ -28,6 +34,9 @@ namespace GraphicsUnitTesting
             Assert.AreEqual(y, 20);
             Assert.AreEqual(radius, 5);
         }
+        /// <summary>
+        /// Tests whether an exception is thrown when it shouldn't be as its been handled already
+        /// </summary>
         [TestMethod]
         public void Circle_ShouldntThrowException()
         {
