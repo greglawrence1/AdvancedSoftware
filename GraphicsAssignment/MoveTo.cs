@@ -29,8 +29,15 @@ namespace GraphicsAssignment
         /// <param name="y">the coordinate of the new y position</param>
         public void moveTo(Graphics g, int x, int y)
         {
-            cursor.UpdateCursor(g, x, y);
-            cursor.ClearPreviousCursor(g);
+            if (x > 0 && x < 640 && y > 0 && y < 480)
+            {
+                cursor.UpdateCursor(g, x, y);
+                cursor.ClearPreviousCursor(g);
+            }
+            else 
+            {
+                Console.WriteLine("Error in numbers");
+            }
         }
     }
 }
