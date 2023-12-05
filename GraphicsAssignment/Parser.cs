@@ -169,7 +169,8 @@ namespace GraphicsAssignment
                 {
                     int i = int.Parse(commands[1]);
                     int f = int.Parse(commands[2]);
-                    h.drawTo(g, i, f);
+                    //h.drawTo(g, i, f);
+                    g.DrawLine(p, currentPosition.X, currentPosition.Y, i, f);
                 }
                 catch (FormatException) 
                 {
