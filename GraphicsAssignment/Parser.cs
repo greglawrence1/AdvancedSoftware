@@ -12,6 +12,8 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        private MoveTo moveto;
+        private Point currentPosition;
         Pen p;
         /// <summary>
         /// the graphics object used for drawing
@@ -32,6 +34,8 @@ namespace GraphicsAssignment
         public Parser(Graphics g)
         {
             this.g = g;
+            this.moveto = new MoveTo();
+            this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
             h = new DrawTo(0, 0);
         }
@@ -108,17 +112,17 @@ namespace GraphicsAssignment
                 }
                                catch (FormatException)
                 {
-                    Console.WriteLine("You need to insert a number for your pen");
+                    Console.WriteLine("You need to choose either black, red or blue for your pen");
                 }
             }
             if (commands[0] == "circle")
             {
                 try
                 {
-                    int i = int.Parse(commands[1]);
-                    int f = int.Parse(commands[2]);
-                    int e = int.Parse(commands[3]);
-                    Circle c = new Circle(Color.Snow, i, f, e, Filled);
+                    //int i = int.Parse(commands[1]);
+                    //int f = int.Parse(commands[2]);
+                    int e = int.Parse(commands[1]);
+                    Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
                     c.draw(g, p);
                 } catch (FormatException) 
                 {
@@ -178,10 +182,12 @@ namespace GraphicsAssignment
             {
                 int m1 = int.Parse(commands[1]);
                 int m2 = int.Parse(commands[2]);
-                MoveTo m = new MoveTo();
-                Cursor c = new Cursor();
-                m.moveTo(g, m1, m2);
-                c.ClearPreviousCursor(g);
+                currentPosition = new Point(m1, m2);
+                moveto.moveTo(g, m1, m2);
+                //MoveTo m = new MoveTo();
+                //Cursor c = new Cursor();
+                //m.moveTo(g, m1, m2);
+                //c.ClearPreviousCursor(g);
                               
             }
         }
