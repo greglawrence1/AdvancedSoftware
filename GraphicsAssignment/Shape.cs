@@ -24,7 +24,7 @@ namespace GraphicsAssignment
             //can't provide anything else as "shape" is too general
         }
 
-        public abstract void draw(Graphics g); //any derrived class must implement this method
+        public abstract void draw(Graphics g, Pen p); //any derrived class must implement this method
 
         public override string ToString()
         {

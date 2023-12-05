@@ -34,9 +34,9 @@ namespace GraphicsAssignment
         /// This does the drawing of the triangle onto the graphic
         /// </summary>
         /// <param name="g">this is the graphic</param>
-        public override void draw(Graphics g)
+        public override void draw(Graphics g, Pen p)
         {
-            Pen p = new Pen(Color.Black, 2);
+            //Pen p = new Pen(Color.Black, 2);
             SolidBrush b = new SolidBrush(colour);
             if (x > 0 && x < 640 && y > 0 && y < 640 && z > 0 && z < 480)
             {

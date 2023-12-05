@@ -12,8 +12,18 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        Pen p;
+        /// <summary>
+        /// the graphics object used for drawing
+        /// </summary>
         Graphics g;
+        /// <summary>
+        /// Indicates whether to fill shapes for drawing
+        /// </summary>
         private bool Fill;
+        /// <summary>
+        /// Object used for positioning
+        /// </summary>
         private DrawTo h;
         /// <summary>
         /// Initializes the parser class
@@ -22,6 +32,7 @@ namespace GraphicsAssignment
         public Parser(Graphics g)
         {
             this.g = g;
+            p = PenSort.GetStarterPen();
             h = new DrawTo(0, 0);
         }
         /// <summary>
@@ -31,6 +42,10 @@ namespace GraphicsAssignment
         {
             get { return Fill; }
             set { Fill = value; }
+        }
+        public void setPen(Color colour, int width)
+        {
+            p = PenSort.GetPen(colour, width);
         }
         /// <summary>
         /// Parses the commands
@@ -74,6 +89,28 @@ namespace GraphicsAssignment
             {
                 Filled = false;
             }
+            if (commands[0] == "setpen")
+            {
+                try
+                {
+                    if (commands[1] == "black")
+                    {
+                        setPen(Color.Black, 2); 
+                    }
+                    if (commands[1] == "red")
+                    {
+                        setPen(Color.Red, 2);
+                    }
+                    if (commands[1] == "blue")
+                    {
+                        setPen(Color.Blue, 2);
+                    }
+                }
+                               catch (FormatException)
+                {
+                    Console.WriteLine("You need to insert a number for your pen");
+                }
+            }
             if (commands[0] == "circle")
             {
                 try
@@ -81,8 +118,8 @@ namespace GraphicsAssignment
                     int i = int.Parse(commands[1]);
                     int f = int.Parse(commands[2]);
                     int e = int.Parse(commands[3]);
-                    Circle c = new Circle(Color.Blue, i, f, e, Filled);
-                    c.draw(g);
+                    Circle c = new Circle(Color.Snow, i, f, e, Filled);
+                    c.draw(g, p);
                 } catch (FormatException) 
                 {
                     Console.WriteLine("You Need to insert a Number in Circle");
@@ -97,7 +134,7 @@ namespace GraphicsAssignment
                     int q3 = int.Parse(commands[3]);
                     int q4 = int.Parse(commands[4]);
                     Rectangle r = new Rectangle(Color.AliceBlue, q1, q2, q3, q4, Filled);
-                    r.draw(g);
+                    r.draw(g,p);
                 } catch(FormatException) 
                 {
                     Console.WriteLine("You need to insert numbers for your Rectangle");
@@ -112,7 +149,7 @@ namespace GraphicsAssignment
                     int t3 = int.Parse(commands[3]);
 
                     Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
-                    t.draw(g);
+                    t.draw(g, p);
                 }
                 catch (FormatException) 
                 {

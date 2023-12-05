@@ -34,12 +34,12 @@ namespace GraphicsAssignment
         /// This does the drawing of the circle onto the graphic
         /// </summary>
         /// <param name="g">this is the graphic</param>
-        public override void draw(Graphics g)
+        public override void draw(Graphics g, Pen p)
         {
             
                 if (x > 0 && x < 640 && y > 0 && y < 640 && radius > 0 && radius < 30)
                 {
-                    Pen p = new Pen(Color.Black, 2);
+                    //Pen p = new Pen(Color.Black, 2);
                     SolidBrush b = new SolidBrush(colour);
                     if (fill)
                     {

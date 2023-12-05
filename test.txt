@@ -1,0 +1,5 @@
+circle 50 50 20
+fillon
+triangle 10 20 30
+filloff 
+rectangle 40 40 40 40

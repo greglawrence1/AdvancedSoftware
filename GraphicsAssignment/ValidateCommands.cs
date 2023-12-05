@@ -16,7 +16,7 @@ namespace GraphicsAssignment
     /// </summary>
         private String[] ACCEPTED_COMMANDS =
         {"reset", "clear", "circle", "rectangle", "triangle"
-            , "drawto", "moveto", "fillon", "filloff"};
+            , "drawto", "moveto", "fillon", "filloff", "setpen"};
 
         /// <summary>
         /// Initializes a new instance of the validate commands

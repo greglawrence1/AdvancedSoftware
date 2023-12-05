@@ -36,9 +36,9 @@ namespace GraphicsAssignment
         /// This does the drawing of the rectangle onto the graphic
         /// </summary>
         /// <param name="g">this is the graphic</param>
-        public override void draw(Graphics g)
+        public override void draw(Graphics g, Pen p)
         {
-            Pen p = new Pen(Color.Black, 2);
+            //Pen p = new Pen(Color.Black, 2);
             SolidBrush b = new SolidBrush(colour);
             if (x > 0 && x < 640 && y > 0 && y < 640 && height > 0 && height < 200 && width > 0 && width < 200)
             {
