@@ -40,7 +40,7 @@ namespace GraphicsAssignment
         {
             //Pen p = new Pen(Color.Black, 2);
             SolidBrush b = new SolidBrush(colour);
-            if (x > 0 && x < 640 && y > 0 && y < 640 && height > 0 && height < 200 && width > 0 && width < 200)
+            if (height > 0 && height < 200 && width > 0 && width < 200)
             {
                 if (fill)
                 {

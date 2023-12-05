@@ -37,9 +37,9 @@ namespace GraphicsAssignment
         public override void draw(Graphics g, Pen p)
         {
             
-                //if (x > 0 && x < 640 && y > 0 && y < 640 && radius > 0 && radius < 30)
+                if (radius > 0 && radius < 45)
                 {
-                    //Pen p = new Pen(Color.Black, 2);
+                    
                     SolidBrush b = new SolidBrush(colour);
                     if (fill)
                     {
@@ -50,10 +50,10 @@ namespace GraphicsAssignment
                         g.DrawEllipse(p, x, y, radius * 2, radius * 2);
                     }
                 }
-                //else 
-                //{
-                //Console.WriteLine("Numbers are out of Range");
-                //}
+                else 
+                {
+                    Console.WriteLine("Numbers are out of Range");
+                }
 
         }
 
