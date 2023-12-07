@@ -35,9 +35,10 @@ namespace GraphicsAssignment
         {
             this.g = g;
             this.moveto = new MoveTo();
+            this.moveto.InitialCursor(g);
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
-            h = new DrawTo(0, 0);
+            //h = new DrawTo(0, 0);
         }
         /// <summary>
         /// Dictates Whether Shapes should be filled by getting a value of true or false
@@ -119,8 +120,6 @@ namespace GraphicsAssignment
             {
                 try
                 {
-                    //int i = int.Parse(commands[1]);
-                    //int f = int.Parse(commands[2]);
                     int e = int.Parse(commands[1]);
                     Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
                     c.draw(g, p);
@@ -168,8 +167,7 @@ namespace GraphicsAssignment
                 try
                 {
                     int i = int.Parse(commands[1]);
-                    int f = int.Parse(commands[2]);
-                    //h.drawTo(g, i, f);
+                    int f = int.Parse(commands[2]);              
                     g.DrawLine(p, currentPosition.X, currentPosition.Y, i, f);
                 }
                 catch (FormatException) 
@@ -181,13 +179,15 @@ namespace GraphicsAssignment
             {
                 int m1 = int.Parse(commands[1]);
                 int m2 = int.Parse(commands[2]);
+                moveto.ClearPrevious(g);
                 currentPosition = new Point(m1, m2);
-                moveto.moveTo(g, m1, m2);
-                //MoveTo m = new MoveTo();
-                //Cursor c = new Cursor();
-                //m.moveTo(g, m1, m2);
-                //c.ClearPreviousCursor(g);
-                              
+                moveto.Move(g, m1, m2);
+            }
+            if (commands[0] == "reset")
+            {            
+                moveto.ClearPrevious(g);
+                moveto.ResetCursor(g);
+                currentPosition = new Point(0, 0);
             }
         }
     }

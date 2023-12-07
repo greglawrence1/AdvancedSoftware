@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Circle.cs" />
     <Compile Include="Clear.cs" />
-    <Compile Include="Cursor.cs" />
     <Compile Include="DrawTo.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
