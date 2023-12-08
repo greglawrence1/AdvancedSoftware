@@ -26,7 +26,6 @@ namespace GraphicsAssignment
         /// <summary>
         /// Object used for positioning
         /// </summary>
-        private DrawTo h;
         /// <summary>
         /// Initializes the parser class
         /// </summary>
@@ -38,7 +37,6 @@ namespace GraphicsAssignment
             this.moveto.InitialCursor(g);
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
-            //h = new DrawTo(0, 0);
         }
         /// <summary>
         /// Dictates Whether Shapes should be filled by getting a value of true or false
@@ -175,13 +173,32 @@ namespace GraphicsAssignment
                    Console.WriteLine("You need to insert numbers following your drawline");
                 }
             }
-            if (commands[0] == "moveto")
+            if (commands[0] == "moveto" && commands.Length == 3)
             {
-                int m1 = int.Parse(commands[1]);
+                try
+                {
+                    {
+                        int m1 = int.Parse(commands[1]);
+                        int m2 = int.Parse(commands[2]);
+                        moveto.ClearPrevious(g);
+                        currentPosition = new Point(m1, m2);
+                        moveto.Move(g, m1, m2);
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("You need to insert two numbers following your moveto");
+                }
+                /*int m1 = int.Parse(commands[1]);
                 int m2 = int.Parse(commands[2]);
                 moveto.ClearPrevious(g);
                 currentPosition = new Point(m1, m2);
                 moveto.Move(g, m1, m2);
+                */
+            }
+            else
+            {
+                    Console.WriteLine("You need to insert two numbers following your moveto");
             }
             if (commands[0] == "reset")
             {            
