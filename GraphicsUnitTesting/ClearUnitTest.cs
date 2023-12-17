@@ -13,9 +13,18 @@ namespace GraphicsUnitTesting
     {
         [TestMethod]
         public void ClearImage_Seeifitisthesamecolour() 
-        {
-            // arrange
-            
+        {           
+
+            Bitmap myBitmap1 = new Bitmap(640, 480);
+            Graphics bitmapG1 = Graphics.FromImage(myBitmap1);
+            bitmapG1.Clear(Color.AliceBlue);
+            Bitmap myBitmap = new Bitmap(640, 480);
+            Graphics bitmapG = Graphics.FromImage(myBitmap);
+            bitmapG.Clear(Color.AliceBlue);
+            Clear clear = new Clear(bitmapG);
+            clear.ClearImage();
+            Assert.AreNotEqual(bitmapG1, bitmapG);
+
             
         }
     }

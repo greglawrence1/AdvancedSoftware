@@ -40,7 +40,7 @@ namespace GraphicsUnitTesting
         }
 
         [TestMethod]
-        public void MoveTo()
+        public void MoveToTestingCoords()
         {
             int x = 10;
             int y = 20;
@@ -48,7 +48,6 @@ namespace GraphicsUnitTesting
             move.UpdatePosition (x, y);
             Assert.AreEqual(10, x);
             Assert.AreEqual(20, y);
-
         }
 
     }
