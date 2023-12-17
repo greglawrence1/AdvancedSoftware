@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace GraphicsUnitTesting
 {
-    internal class SaveUnitTest
+    [TestClass]
+    public class SaveUnitTest
     {
+        [TestMethod]
+        public void SaveUnitTestPractise() 
+        {
+            // Arrange
+            string expected = "hello world";
+            string file = "C:\\Users\\greg_\\Documents\\projects\\GraphicsAssignment\\Savepractise.txt";
+            // Act
+            File.WriteAllText(expected, file);
+           
+            // Assert
+            Assert.AreEqual(expected, File.ReadAllText(file));
+        }
+
     }
 }

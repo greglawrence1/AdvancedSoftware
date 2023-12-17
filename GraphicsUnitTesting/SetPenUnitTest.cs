@@ -15,16 +15,13 @@ namespace GraphicsUnitTesting
         public void SetPenTesting()
         {
             // Arrange
-           // Bitmap myBitmap = new Bitmap(600, 500);
-            //Graphics bmG;
-            //bmG = Graphics.FromImage(myBitmap);
-           // Parser parser = new Parser(bmG);
+
             Color expectedColour = Color.Red;
             int expectedWidth = 2;
             Pen p = new Pen(expectedColour, expectedWidth);
             
             // Act
-            //parser.parserCommand("setpen red");
+            
             Pen pen = PenSort.GetPen(expectedColour, expectedWidth);
             // Assert
             Assert.AreEqual(expectedColour, pen.Color);
