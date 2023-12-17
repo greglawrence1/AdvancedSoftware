@@ -93,7 +93,7 @@ namespace GraphicsAssignment
                 Filled = false;
             }
             if (commands[0] == "setpen")
-            {
+            {   
                 try
                 {
                     if (commands[1] == "black")
@@ -118,13 +118,19 @@ namespace GraphicsAssignment
             {
                 try
                 {
+                    if (commands.Length > 2)
+                    {
+                        throw new FormatException("You need to insert a single number for your circle");
+                    }
                     int e = int.Parse(commands[1]);
                     Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
                     c.draw(g, p);
-                } catch (FormatException) 
+                }
+                catch (FormatException)
                 {
                     Console.WriteLine("You Need to insert a Number in Circle");
                 }
+            
             }
             if (commands[0] == "rectangle")
             {
@@ -175,24 +181,26 @@ namespace GraphicsAssignment
             }
             if (commands[0] == "moveto")
             {
-                if(commands.Length != 3)
-                {
-                    Console.WriteLine("You need to insert two numbers following your moveto");
-                }
-                try
-                {
+                
+                    try
                     {
-                        int m1 = int.Parse(commands[1]);
-                        int m2 = int.Parse(commands[2]);
-                        moveto.ClearPrevious(g);
-                        currentPosition = new Point(m1, m2);
-                        moveto.Move(g, m1, m2);
+                    if (commands.Length > 3)
+                    {
+                            throw new FormatException("You need to insert two numbers for your moveto");
                     }
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("You need to insert two numbers following your moveto");
-                }
+                        {
+                            int m1 = int.Parse(commands[1]);
+                            int m2 = int.Parse(commands[2]);
+                            moveto.ClearPrevious(g);
+                            currentPosition = new Point(m1, m2);
+                            moveto.Move(g, m1, m2);
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("You need to insert two numbers following your moveto");
+                    }
+                
             }
             if (commands[0] == "reset")
             {            
