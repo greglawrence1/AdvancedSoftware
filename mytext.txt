@@ -1,2 +1,6 @@
-circle 50 50 20
-triangle 22 33 44
+moveto 30 40
+drawto 100 20
+circle 30
+fillon
+moveto 90 10
+rectangle 20 20

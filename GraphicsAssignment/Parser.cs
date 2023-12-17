@@ -160,7 +160,7 @@ namespace GraphicsAssignment
                 Clear clear = new Clear(g);
                 clear.ClearImage();
             }
-            if (commands[0] == "drawto")
+            if (commands[0] == "drawto" && commands.Length == 3)
             {
                 try
                 {
@@ -172,6 +172,10 @@ namespace GraphicsAssignment
                 {
                    Console.WriteLine("You need to insert numbers following your drawline");
                 }
+            }
+            else
+            {
+                Console.WriteLine("You need to insert two numbers following your drawline");
             }
             if (commands[0] == "moveto" && commands.Length == 3)
             {
@@ -189,12 +193,6 @@ namespace GraphicsAssignment
                 {
                     Console.WriteLine("You need to insert two numbers following your moveto");
                 }
-                /*int m1 = int.Parse(commands[1]);
-                int m2 = int.Parse(commands[2]);
-                moveto.ClearPrevious(g);
-                currentPosition = new Point(m1, m2);
-                moveto.Move(g, m1, m2);
-                */
             }
             else
             {

@@ -14,6 +14,7 @@ namespace GraphicsUnitTesting
     [TestClass]
     public class MoveToTesting
     {
+        Graphics g;
         /// <summary>
         /// this unit tests checks the bounds, an exception shouldn't be thrown as the error is handled in the code
         /// </summary>
@@ -24,14 +25,12 @@ namespace GraphicsUnitTesting
             Color color = Color.Red;
             int x = 10;
             int y = 200000;
-            Bitmap bitmap = new Bitmap(640, 480);
-            Graphics g;
-            g = Graphics.FromImage(bitmap);
             try
             {
                 //Act
                 MoveTo move = new MoveTo();
-                move.moveTo(g, x, y);
+                move.UpdatePosition(x, y);
+                
             }
             catch (Exception)
             {
@@ -39,5 +38,18 @@ namespace GraphicsUnitTesting
                 Assert.Fail("Shouldn't be an Exception");
             }
         }
+
+        [TestMethod]
+        public void MoveTo()
+        {
+            int x = 10;
+            int y = 20;
+            MoveTo move = new MoveTo();
+            move.UpdatePosition (x, y);
+            Assert.AreEqual(10, x);
+            Assert.AreEqual(20, y);
+
+        }
+
     }
 }
