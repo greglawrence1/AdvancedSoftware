@@ -17,7 +17,7 @@ namespace GraphicsAssignment
         protected bool fill;
 
         /// <summary>
-        /// Initizalises the Rectangle Class
+        /// Initizalises the Circle Class
         /// </summary>
         /// <param name="colour">this is the colour of the circle</param>
         /// <param name="x">this is the first coordinate of the circle</param>

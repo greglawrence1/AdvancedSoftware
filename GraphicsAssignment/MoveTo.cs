@@ -12,7 +12,7 @@ namespace GraphicsAssignment
     /// </summary>
     public class MoveTo
     {
-        //private Cursor cursor;
+
         private Point startPos;
         private Point currentPos;
         public Point currentPosition
@@ -42,31 +42,47 @@ namespace GraphicsAssignment
             UpdatePosition(x, y);
             DrawCursor(g);
         }
-
+        /// <summary>
+        /// Updates the position of the cursor
+        /// </summary>
+        /// <param name="x">new x coord</param>
+        /// <param name="y">new y coord</param>
         public void UpdatePosition(int x, int y)
         {
             currentPos = new Point(x, y);
         }
-
+        /// <summary>
+        /// It draws a new cursor on the graphics where the last one is to cover it up
+        /// </summary>
+        /// <param name="g"></param>
         public void ClearPrevious(Graphics g)
         {
             Pen p = new Pen(Color.DarkGray, 2);
             g.DrawRectangle(p, currentPos.X, currentPos.Y, 4, 4);
         }
-
+        /// <summary>
+        /// Resets the cursor to the original positon
+        /// </summary>
+        /// <param name="g"></param>
         public void ResetCursor(Graphics g)
         {
             ClearPrevious(g);
             currentPos = startPos;
             DrawCursor(g);
         }   
-
+        /// <summary>
+        /// Draws the cursor on the graphics current position
+        /// </summary>
+        /// <param name="g"></param>
         public void DrawCursor(Graphics g)
         {
             Pen p = new Pen(Color.Red, 2);
             g.DrawRectangle(p, currentPos.X, currentPos.Y, 4, 4);
         }
-
+        /// <summary>
+        /// Draws inital cursor on the graphics
+        /// </summary>
+        /// <param name="g"></param>
         public void InitialCursor(Graphics g) 
         {
             Pen p = new Pen(Color.Red, 2);

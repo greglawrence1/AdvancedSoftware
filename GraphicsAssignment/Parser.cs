@@ -12,7 +12,13 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        /// <summary>
+        /// creating an instance of the MoveTo class
+        /// </summary>
         private MoveTo moveto;
+        /// <summary>
+        /// the point tracking the current position
+        /// </summary>
         private Point currentPosition;
         Pen p;
         /// <summary>
@@ -184,7 +190,7 @@ namespace GraphicsAssignment
                 
                     try
                     {
-                    if (commands.Length > 3)
+                    if (commands.Length > 3 || commands.Length <= 2)
                     {
                             throw new FormatException("You need to insert two numbers for your moveto");
                     }
