@@ -34,7 +34,7 @@ namespace GraphicsAssignment
         private void Run_Button_Click(object sender, EventArgs e)
         {
             string mytext = textBox1.Text;
-            parser.parseCommand(mytext);
+            parser.parseCommand(mytext, 0);
             textBox1.Clear();
             pictureBox1.Refresh();
         }
@@ -90,6 +90,11 @@ namespace GraphicsAssignment
                 File.WriteAllText(filePath, richTextBox1.Text);
                 richTextBox1.Clear();
             }
+        }
+
+        private void Syntax_Button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

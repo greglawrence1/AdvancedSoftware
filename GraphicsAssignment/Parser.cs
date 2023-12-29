@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Linq.Expressions;
 
 namespace GraphicsAssignment
 {
@@ -65,14 +66,22 @@ namespace GraphicsAssignment
             String[] commandList = commands.Split('\n');
             for (int i = 0; i < commandList.Length; i++)
             {
-                parseCommand(commandList[i]);
+                try
+                {
+                    parseCommand(commandList[i], i + 1);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
+                }
             }
+       
         }
         /// <summary>
         /// Parses a single command
         /// </summary>
         /// <param name="command">command gets parsed split with a space</param>
-        public void parseCommand(string command)
+        public void parseCommand(string command, int lineNumber)
         {
             command.Trim().ToLower();
             String[] commands = command.Split(' ');
@@ -80,120 +89,123 @@ namespace GraphicsAssignment
             String firstcommand = commands[0];
             try
             {
-                if (validate.IsAcceptedCommand(firstcommand) == false)
+                try
                 {
+                    if (validate.IsAcceptedCommand(firstcommand) == false)
+                    {
 
-                    throw new InvalidOperationException("You have entered an incorrect command");
-                }
-            }
-            catch (InvalidOperationException)
-            {
-                Console.WriteLine("You have entered an incorrect command");
-            }
-            if (commands[0] == "fillon")
-            {
-                Filled = true;
-            }
-            if (commands[0] == "filloff")
-            {
-                Filled = false;
-            }
-            if (commands[0] == "setpen")
-            {   
-                try
-                {
-                    if (commands[1] == "black")
-                    {
-                        setPen(Color.Black, 2); 
-                    }
-                    if (commands[1] == "red")
-                    {
-                        setPen(Color.Red, 2);
-                    }
-                    if (commands[1] == "blue")
-                    {
-                        setPen(Color.Blue, 2);
+                        throw new InvalidOperationException("You have entered an incorrect command");
                     }
                 }
-                               catch (FormatException)
+                catch (InvalidOperationException)
                 {
-                    Console.WriteLine("You need to choose either black, red or blue for your pen");
+                    Console.WriteLine("You have entered an incorrect command");
                 }
-            }
-            if (commands[0] == "circle")
-            {
-                try
+                if (commands[0] == "fillon")
                 {
-                    if (commands.Length > 2)
-                    {
-                        throw new FormatException("You need to insert a single number for your circle");
-                    }
-                    int e = int.Parse(commands[1]);
-                    Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
-                    c.draw(g, p);
+                    Filled = true;
                 }
-                catch (FormatException)
+                if (commands[0] == "filloff")
                 {
-                    Console.WriteLine("You Need to insert a Number in Circle");
+                    Filled = false;
                 }
-            
-            }
-            if (commands[0] == "rectangle")
-            {
-                try
+                if (commands[0] == "setpen")
                 {
-                    int q1 = int.Parse(commands[1]);
-                    int q2 = int.Parse(commands[2]);
-                    Rectangle r = new Rectangle(Color.AliceBlue, currentPosition.X, currentPosition.Y, q1, q2, Filled);
-                    r.draw(g,p);
-                } catch(FormatException) 
-                {
-                    Console.WriteLine("You need to insert numbers for your Rectangle");
-                }
-            }
-            if (commands[0] == "triangle")
-            {
-                try
-                {
-                    int t1 = int.Parse(commands[1]);
-                    int t2 = int.Parse(commands[2]);
-                    int t3 = int.Parse(commands[3]);
-
-                    Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
-                    t.draw(g, p);
-                }
-                catch (FormatException) 
-                {
-                    Console.WriteLine("You need to insert numbers for your triangle");
-                }
-            }
-            if (commands[0] == "clear")
-            {
-                Clear clear = new Clear(g);
-                clear.ClearImage();
-            }
-            if (commands[0] == "drawto")
-            {
-                try
-                {
-                    int i = int.Parse(commands[1]);
-                    int f = int.Parse(commands[2]);              
-                    g.DrawLine(p, currentPosition.X, currentPosition.Y, i, f);
-                }
-                catch (FormatException) 
-                {
-                   Console.WriteLine("You need to insert numbers following your drawline");
-                }
-            }
-            if (commands[0] == "moveto")
-            {
-                
                     try
                     {
-                    if (commands.Length > 3 || commands.Length <= 2)
-                    {
-                            throw new FormatException("You need to insert two numbers for your moveto");
+                        if (commands[1] == "black")
+                        {
+                            setPen(Color.Black, 2);
+                        }
+                        if (commands[1] == "red")
+                        {
+                            setPen(Color.Red, 2);
+                        }
+                        if (commands[1] == "blue")
+                        {
+                            setPen(Color.Blue, 2);
+                        }
                     }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("You need to choose either black, red or blue for your pen");
+                    }
+                }
+                if (commands[0] == "circle")
+                {
+                    try
+                    {
+                        if (commands.Length > 2)
+                        {
+                            throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
+                        }
+                        int e = int.Parse(commands[1]);
+                        Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
+                        c.draw(g, p);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Error on line " + lineNumber + " You Need to insert a Number in Circle");
+                    }
+
+                }
+                if (commands[0] == "rectangle")
+                {
+                    try
+                    {
+                        int q1 = int.Parse(commands[1]);
+                        int q2 = int.Parse(commands[2]);
+                        Rectangle r = new Rectangle(Color.AliceBlue, currentPosition.X, currentPosition.Y, q1, q2, Filled);
+                        r.draw(g, p);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Error on line " + lineNumber + " You need to insert numbers for your Rectangle");
+                    }
+                }
+                if (commands[0] == "triangle")
+                {
+                    try
+                    {
+                        int t1 = int.Parse(commands[1]);
+                        int t2 = int.Parse(commands[2]);
+                        int t3 = int.Parse(commands[3]);
+
+                        Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
+                        t.draw(g, p);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("You need to insert numbers for your triangle");
+                    }
+                }
+                if (commands[0] == "clear")
+                {
+                    Clear clear = new Clear(g);
+                    clear.ClearImage();
+                }
+                if (commands[0] == "drawto")
+                {
+                    try
+                    {
+                        int i = int.Parse(commands[1]);
+                        int f = int.Parse(commands[2]);
+                        g.DrawLine(p, currentPosition.X, currentPosition.Y, i, f);
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("You need to insert numbers following your drawline");
+                    }
+                }
+                if (commands[0] == "moveto")
+                {
+
+                    try
+                    {
+                        if (commands.Length > 3 || commands.Length <= 2)
+                        {
+                            throw new FormatException("You need to insert two numbers for your moveto");
+                        }
                         {
                             int m1 = int.Parse(commands[1]);
                             int m2 = int.Parse(commands[2]);
@@ -206,14 +218,27 @@ namespace GraphicsAssignment
                     {
                         Console.WriteLine("You need to insert two numbers following your moveto");
                     }
-                
+
+                }
+                if (commands[0] == "reset")
+                {
+                    moveto.ClearPrevious(g);
+                    moveto.ResetCursor(g);
+                    currentPosition = new Point(0, 0);
+                }
             }
-            if (commands[0] == "reset")
-            {            
-                moveto.ClearPrevious(g);
-                moveto.ResetCursor(g);
-                currentPosition = new Point(0, 0);
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error on Line " + lineNumber);
             }
+            
+        }
+
+        public void ParseCommandpart2(string command) 
+        {
+            command.Trim().ToLower();
+            command.Split(' ');
+           // if(comm)
         }
     }
 }
