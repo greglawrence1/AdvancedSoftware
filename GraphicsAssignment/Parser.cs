@@ -81,6 +81,48 @@ namespace GraphicsAssignment
             }
        
         }
+
+        public int expressionParser(string[] expression)
+        {
+            int result = 0;
+            int currentNumber = 0;
+            string currentOperator = "";
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (expression[i] == "+" || expression[i] == "-" || expression[i] == "*" || expression[i] == "/")
+                {
+                    currentOperator = expression[i];
+                }
+                else
+                {
+                    if (this.variables.ContainsKey(expression[i]))
+                    {
+                        currentNumber = this.variables[expression[i]];
+                    }
+                    else
+                    {
+                        currentNumber = int.Parse(expression[i]);
+                    }
+                }
+                if (currentOperator == "+")
+                {
+                    result += currentNumber;
+                }
+                else if (currentOperator == "-")
+                {
+                    result -= currentNumber;
+                }
+                else if (currentOperator == "*")
+                {
+                    result *= currentNumber;
+                }
+                else if (currentOperator == "/")
+                {
+                    result /= currentNumber;
+                }
+            }
+            return result;
+        }
         /// <summary>
         /// Parses a single command
         /// </summary>
@@ -109,22 +151,20 @@ namespace GraphicsAssignment
                 if (commands[1] == "=")
                 {
                     string variable = commands[0];
-                                    
+
+                    if (commands.Length > 2)
+                    {
                         if (commands.Contains("+"))
                         {
-                            int index = Array.IndexOf(commands, "+");
-
-                            int value3 = int.Parse(commands[2]);
-                            int value2 = int.Parse(commands[index + 1]);
-                            int value4 = value3 + value2;
-                            this.variables[variable] = value4;
+                            int result = expressionParser(commands.Skip(2).ToArray());
+                            this.variables[variable] = result;
                         }
-                    else 
-                    {
-                        int value = int.Parse(commands[2]);
-                        this.variables.Add(variable, value);
+                        else
+                        {
+                            int value = int.Parse(commands[2]);
+                            this.variables.Add(variable, value);
+                        }
                     }
-                    
                 }
                 
                 if (commands[0] == "fillon")
