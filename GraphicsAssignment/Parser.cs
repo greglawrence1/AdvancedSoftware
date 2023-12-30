@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Linq.Expressions;
+using System.Windows.Forms;
 
 namespace GraphicsAssignment
 {
@@ -13,6 +14,7 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        private Dictionary<string, int> variables;
         /// <summary>
         /// creating an instance of the MoveTo class
         /// </summary>
@@ -44,7 +46,9 @@ namespace GraphicsAssignment
             this.moveto.InitialCursor(g);
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
+            this.variables = new Dictionary<string, int>();
         }
+
         /// <summary>
         /// Dictates Whether Shapes should be filled by getting a value of true or false
         /// </summary>
@@ -89,7 +93,7 @@ namespace GraphicsAssignment
             String firstcommand = commands[0];
             try
             {
-                try
+                /*try
                 {
                     if (validate.IsAcceptedCommand(firstcommand) == false)
                     {
@@ -100,6 +104,13 @@ namespace GraphicsAssignment
                 catch (InvalidOperationException)
                 {
                     Console.WriteLine("You have entered an incorrect command");
+                }
+                */
+                if (commands[1] == "=")
+                {
+                    string variable = commands[0];
+                    int value = int.Parse(commands[2]);
+                    this.variables.Add(variable, value);
                 }
                 if (commands[0] == "fillon")
                 {
@@ -139,13 +150,25 @@ namespace GraphicsAssignment
                         {
                             throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
                         }
-                        int e = int.Parse(commands[1]);
+                        int e; 
+                        if(int.TryParse(commands[1], out e))
+                        {
+
+                        }
+                        else if (this.variables.ContainsKey(commands[1]))
+                        {
+                            e = this.variables[commands[1]];
+                        }
+                        else
+                        {
+                            throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
+                        }
                         Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
                         c.draw(g, p);
                     }
                     catch (FormatException)
                     {
-                        Console.WriteLine("Error on line " + lineNumber + " You Need to insert a Number in Circle");
+                        Console.WriteLine("Error on line " + lineNumber + " You need to insert a single number for your circle");
                     }
 
                 }
@@ -237,8 +260,14 @@ namespace GraphicsAssignment
         public void ParseCommandpart2(string command) 
         {
             command.Trim().ToLower();
-            command.Split(' ');
-           // if(comm)
+            String[] commands = command.Split(' ');
+            
+            if (commands[1] == "=")
+            {
+                string variable = commands[0];
+                int value = int.Parse(commands[2]);
+                this.variables.Add(variable, value);
+            }
         }
     }
 }
