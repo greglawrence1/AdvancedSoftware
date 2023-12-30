@@ -109,9 +109,24 @@ namespace GraphicsAssignment
                 if (commands[1] == "=")
                 {
                     string variable = commands[0];
-                    int value = int.Parse(commands[2]);
-                    this.variables.Add(variable, value);
+                                    
+                        if (commands.Contains("+"))
+                        {
+                            int index = Array.IndexOf(commands, "+");
+
+                            int value3 = int.Parse(commands[2]);
+                            int value2 = int.Parse(commands[index + 1]);
+                            int value4 = value3 + value2;
+                            this.variables[variable] = value4;
+                        }
+                    else 
+                    {
+                        int value = int.Parse(commands[2]);
+                        this.variables.Add(variable, value);
+                    }
+                    
                 }
+                
                 if (commands[0] == "fillon")
                 {
                     Filled = true;
@@ -257,7 +272,7 @@ namespace GraphicsAssignment
             
         }
 
-        public void ParseCommandpart2(string command) 
+        public void ParseCommandpart2(string command, int lineNumber) 
         {
             command.Trim().ToLower();
             String[] commands = command.Split(' ');
@@ -267,6 +282,46 @@ namespace GraphicsAssignment
                 string variable = commands[0];
                 int value = int.Parse(commands[2]);
                 this.variables.Add(variable, value);
+                for(int i = 0; i < commands.Length; i++)
+                {
+                    if (commands[i] == "+")
+                    {
+                        int value2 = int.Parse(commands[i + 1]);
+                        int value3 = value + value2;
+                        this.variables.Add(variable, value3);
+                    }
+                }
+            }
+
+            if (commands[0] == "circle")
+            {
+                try
+                {
+                    if (commands.Length > 2)
+                    {
+                        throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
+                    }
+                    int e;
+                    if (int.TryParse(commands[1], out e))
+                    {
+
+                    }
+                    else if (this.variables.ContainsKey(commands[1]))
+                    {
+                        e = this.variables[commands[1]];
+                    }
+                    else
+                    {
+                        throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
+                    }
+                    Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
+                    c.draw(g, p);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error on line " + lineNumber + " You need to insert a single number for your circle");
+                }
+
             }
         }
     }
