@@ -84,9 +84,10 @@ namespace GraphicsAssignment
 
         public int expressionParser(string[] expression)
         {
-            int result = 0;
-            int currentNumber = 0;
-            string currentOperator = "";
+            int result = 0;         
+            
+            string currentOperator = "+";        
+
             for (int i = 0; i < expression.Length; i++)
             {
                 if (expression[i] == "+" || expression[i] == "-" || expression[i] == "*" || expression[i] == "/")
@@ -95,30 +96,34 @@ namespace GraphicsAssignment
                 }
                 else
                 {
-                    if (this.variables.ContainsKey(expression[i]))
+                    int currentNumber;
+                    if (this.variables.TryGetValue(expression[i], out currentNumber))
                     {
-                        currentNumber = this.variables[expression[i]];
+
                     }
                     else
                     {
-                        currentNumber = int.Parse(expression[i]);
+                        int.TryParse(expression[i], out currentNumber);
                     }
-                }
-                if (currentOperator == "+")
-                {
-                    result += currentNumber;
-                }
-                else if (currentOperator == "-")
-                {
-                    result -= currentNumber;
-                }
-                else if (currentOperator == "*")
-                {
-                    result *= currentNumber;
-                }
-                else if (currentOperator == "/")
-                {
-                    result /= currentNumber;
+
+
+
+                    if (currentOperator == "+")
+                    {
+                        result += currentNumber;
+                    }
+                    else if (currentOperator == "-")
+                    {
+                        result -= currentNumber;
+                    }
+                    else if (currentOperator == "*")
+                    {
+                        result *= currentNumber;
+                    }
+                    else if (currentOperator == "/")
+                    {
+                        result /= currentNumber;
+                    }
                 }
             }
             return result;
@@ -135,7 +140,7 @@ namespace GraphicsAssignment
             String firstcommand = commands[0];
             try
             {
-                /*try
+               /*try
                 {
                     if (validate.IsAcceptedCommand(firstcommand) == false)
                     {
@@ -155,6 +160,21 @@ namespace GraphicsAssignment
                     if (commands.Length > 2)
                     {
                         if (commands.Contains("+"))
+                        {
+                            int result = expressionParser(commands.Skip(2).ToArray());
+                            this.variables[variable] = result;
+                        }
+                        else if (commands.Contains("-"))
+                        {
+                            int result = expressionParser(commands.Skip(2).ToArray());
+                            this.variables[variable] = result;
+                        }
+                        else if (commands.Contains("*"))
+                        {
+                            int result = expressionParser(commands.Skip(2).ToArray());
+                            this.variables[variable] = result;
+                        }
+                        else if (commands.Contains("/"))
                         {
                             int result = expressionParser(commands.Skip(2).ToArray());
                             this.variables[variable] = result;
