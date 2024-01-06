@@ -10,6 +10,7 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        private errorCheck errorCheck;
         private bool isAcceptedCommand;
         private Dictionary<string, int> variables;
         /// <summary>
@@ -44,8 +45,13 @@ namespace GraphicsAssignment
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
             this.variables = new Dictionary<string, int>();
+            this.errorCheck = new errorCheck();
         }
 
+        public List<string> CheckSyntax(string commands)
+        {
+            return errorCheck.checkSyntax(commands);
+        }
         public void setAcceptedCommand(bool value)
         {
             isAcceptedCommand = value;
@@ -241,11 +247,8 @@ namespace GraphicsAssignment
 
             if (variables.TryGetValue(variable, out int variableValue))
             {
-                bool condition = operatorCheck(command, startIndex,  lineNumber);
-                setAcceptedCommand(condition);
-                                         
-
-                while (isAcceptedCommand && condition)
+                                                      
+                while (isAcceptedCommand && operatorCheck(command, startIndex, lineNumber))
                 {
 
                     for (int i = startIndex + 4; i < command.Length; i++)
@@ -255,10 +258,12 @@ namespace GraphicsAssignment
                             break;
                         }
                         parseCommand(command[i], lineNumber);
-                        variables[variable] = variableValue;
-                        condition = operatorCheck(command, startIndex, lineNumber);
-
                     }
+                    if (!isAcceptedCommand)
+                    {
+                        break;                                                      
+                    }
+                    variables[variable] = variableValue;
                     
                 }
             }

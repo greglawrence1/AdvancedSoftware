@@ -94,7 +94,24 @@ namespace GraphicsAssignment
 
         private void Syntax_Button_Click(object sender, EventArgs e)
         {
+            string checkSyntax = richTextBox1.Text;
 
+            errorCheck errorCheck = new errorCheck();
+            List<string> errors = errorCheck.checkSyntax(checkSyntax);
+
+            if(errors.Count == 0)
+            {
+                MessageBox.Show("No errors found");
+            }
+            else
+            {
+                string errorString = "";
+                foreach(string error in errors)
+                {
+                    errorString += error + "\n";
+                }
+                MessageBox.Show(errorString);
+            }
         }
     }
 }
