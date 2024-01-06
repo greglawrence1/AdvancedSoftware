@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Linq.Expressions;
-using System.Windows.Forms;
+using System.Linq;
 
 namespace GraphicsAssignment
 {
@@ -14,6 +10,7 @@ namespace GraphicsAssignment
     /// </summary>
     public class Parser
     {
+        private bool isAcceptedCommand;
         private Dictionary<string, int> variables;
         /// <summary>
         /// creating an instance of the MoveTo class
@@ -49,6 +46,10 @@ namespace GraphicsAssignment
             this.variables = new Dictionary<string, int>();
         }
 
+        public void setAcceptedCommand(bool value)
+        {
+            isAcceptedCommand = value;
+        }
         /// <summary>
         /// Dictates Whether Shapes should be filled by getting a value of true or false
         /// </summary>
@@ -67,26 +68,30 @@ namespace GraphicsAssignment
         /// <param name="commands">what gets parsed and is split when a new line occurs</param>
         public void parserCommand(string commands)
         {
+            isAcceptedCommand = true;
             String[] commandList = commands.Split('\n');
             for (int i = 0; i < commandList.Length; i++)
             {
                 try
                 {
-                    parseCommand(commandList[i], i + 1);
+                    if(isAcceptedCommand)
+                    {
+                        parseCommand(commandList[i], i + 1);
+                    }                 
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
                 }
             }
-       
+
         }
 
         public int expressionParser(string[] expression)
         {
-            int result = 0;         
-            
-            string currentOperator = "+";        
+            int result = 0;
+
+            string currentOperator = "+";
 
             for (int i = 0; i < expression.Length; i++)
             {
@@ -128,7 +133,119 @@ namespace GraphicsAssignment
             }
             return result;
         }
-        /// <summary>
+
+        public bool operatorCheck(string[] command, int lineNumber)
+        {
+            string variable = command[1];
+            string operatorVariable = command[2];
+            int comparisonValue;
+
+            if (int.TryParse(command[3], out comparisonValue) || variables.TryGetValue(command[3], out comparisonValue))
+            {
+                if (variables.TryGetValue(variable, out int variableValue))
+                {
+
+                    switch (operatorVariable)
+                    {
+                        case ">":
+                            return variableValue > comparisonValue;
+                        case "<":
+                            return variableValue < comparisonValue;
+                        case ">=":
+                            return variableValue >= comparisonValue;
+                        case "<=":
+                            return variableValue <= comparisonValue;
+                        case "==":
+                            return variableValue == comparisonValue;
+                        case "!=":
+                            return variableValue != comparisonValue;
+                        default:
+                            Console.WriteLine("You have entered an incorrect operator");
+                            return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have entered an incorrect variable");
+                return false;
+            }
+        }
+
+
+        public void executeIf(string[] command, int startIndex, int lineNumber)
+        {
+            if (command.Length < 4)
+            {
+                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
+                return;
+            }
+
+            string variable = command[startIndex + 1];
+            string comparisonOperator = command[startIndex + 2];
+            int comparisonValue;
+
+            if (!int.TryParse(command[startIndex + 3], out comparisonValue) && !variables.TryGetValue(command[startIndex + 3], out comparisonValue))
+            {
+                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
+                return;
+            }
+
+            if(variables.TryGetValue(variable, out int variableValue))
+            {
+                bool condition = false;
+
+                switch(comparisonOperator)
+                {
+                    case ">":
+                        condition = variableValue > comparisonValue;
+                        break;
+                    case "<":
+                        condition = variableValue < comparisonValue;
+                        break;
+                    case ">=":
+                        condition = variableValue >= comparisonValue;
+                        break;
+                    case "<=":
+                        condition = variableValue <= comparisonValue;
+                        break;
+                    case "==":
+                        condition = variableValue == comparisonValue;
+                        break;
+                    case "!=":
+                        condition = variableValue != comparisonValue;
+                        break;
+                    default:
+                        Console.WriteLine("You have entered an incorrect operator on linenumber " + lineNumber);
+                        return;
+                }
+                setAcceptedCommand(condition);
+
+            if (isAcceptedCommand)
+                {
+                    
+                    for(int i = startIndex + 4; i < command.Length; i++)
+                    {
+                        if (command[i] == "endif" || !isAcceptedCommand)
+                        {
+                            break;
+                        }
+                        parseCommand(command[i], lineNumber);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);              
+            
+            }
+        }
+
+        /// <summary.>
         /// Parses a single command
         /// </summary>
         /// <param name="command">command gets parsed split with a space</param>
@@ -140,19 +257,24 @@ namespace GraphicsAssignment
             String firstcommand = commands[0];
             try
             {
-               /*try
-                {
-                    if (validate.IsAcceptedCommand(firstcommand) == false)
-                    {
+                /*try
+                 {
+                     if (validate.IsAcceptedCommand(firstcommand) == false)
+                     {
 
-                        throw new InvalidOperationException("You have entered an incorrect command");
-                    }
-                }
-                catch (InvalidOperationException)
+                         throw new InvalidOperationException("You have entered an incorrect command");
+                     }
+                 }
+                 catch (InvalidOperationException)
+                 {
+                     Console.WriteLine("You have entered an incorrect command");
+                 }
+                 */
+                if (commands[0] == "if")
                 {
-                    Console.WriteLine("You have entered an incorrect command");
+                    executeIf(commands, 0, lineNumber);
                 }
-                */
+
                 if (commands[1] == "=")
                 {
                     string variable = commands[0];
@@ -186,7 +308,7 @@ namespace GraphicsAssignment
                         }
                     }
                 }
-                
+
                 if (commands[0] == "fillon")
                 {
                     Filled = true;
@@ -221,12 +343,12 @@ namespace GraphicsAssignment
                 {
                     try
                     {
-                        if (commands.Length > 2)
+                        if (commands.Length != 2)
                         {
                             throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
                         }
-                        int e; 
-                        if(int.TryParse(commands[1], out e))
+                        int e;
+                        if (int.TryParse(commands[1], out e))
                         {
 
                         }
@@ -328,60 +450,6 @@ namespace GraphicsAssignment
             catch (Exception ex)
             {
                 Console.WriteLine("Error on Line " + lineNumber);
-            }
-            
-        }
-
-        public void ParseCommandpart2(string command, int lineNumber) 
-        {
-            command.Trim().ToLower();
-            String[] commands = command.Split(' ');
-            
-            if (commands[1] == "=")
-            {
-                string variable = commands[0];
-                int value = int.Parse(commands[2]);
-                this.variables.Add(variable, value);
-                for(int i = 0; i < commands.Length; i++)
-                {
-                    if (commands[i] == "+")
-                    {
-                        int value2 = int.Parse(commands[i + 1]);
-                        int value3 = value + value2;
-                        this.variables.Add(variable, value3);
-                    }
-                }
-            }
-
-            if (commands[0] == "circle")
-            {
-                try
-                {
-                    if (commands.Length > 2)
-                    {
-                        throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
-                    }
-                    int e;
-                    if (int.TryParse(commands[1], out e))
-                    {
-
-                    }
-                    else if (this.variables.ContainsKey(commands[1]))
-                    {
-                        e = this.variables[commands[1]];
-                    }
-                    else
-                    {
-                        throw new FormatException("You need to insert a single number for your circle error is on line " + lineNumber);
-                    }
-                    Circle c = new Circle(Color.Snow, currentPosition.X, currentPosition.Y, e, Filled);
-                    c.draw(g, p);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Error on line " + lineNumber + " You need to insert a single number for your circle");
-                }
-
             }
         }
     }
