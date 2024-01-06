@@ -134,13 +134,13 @@ namespace GraphicsAssignment
             return result;
         }
 
-        public bool operatorCheck(string[] command, int lineNumber)
+        public bool operatorCheck(string[] command,int startIndex, int lineNumber)
         {
-            string variable = command[1];
-            string operatorVariable = command[2];
+            string variable = command[startIndex + 1];
+            string operatorVariable = command[startIndex + 2];
             int comparisonValue;
 
-            if (int.TryParse(command[3], out comparisonValue) || variables.TryGetValue(command[3], out comparisonValue))
+            if (int.TryParse(command[startIndex + 3], out comparisonValue) || variables.TryGetValue(command[startIndex + 3], out comparisonValue))
             {
                 if (variables.TryGetValue(variable, out int variableValue))
                 {
@@ -197,32 +197,7 @@ namespace GraphicsAssignment
 
             if(variables.TryGetValue(variable, out int variableValue))
             {
-                bool condition = false;
-
-                switch(comparisonOperator)
-                {
-                    case ">":
-                        condition = variableValue > comparisonValue;
-                        break;
-                    case "<":
-                        condition = variableValue < comparisonValue;
-                        break;
-                    case ">=":
-                        condition = variableValue >= comparisonValue;
-                        break;
-                    case "<=":
-                        condition = variableValue <= comparisonValue;
-                        break;
-                    case "==":
-                        condition = variableValue == comparisonValue;
-                        break;
-                    case "!=":
-                        condition = variableValue != comparisonValue;
-                        break;
-                    default:
-                        Console.WriteLine("You have entered an incorrect operator on linenumber " + lineNumber);
-                        return;
-                }
+            bool condition = operatorCheck(command, startIndex, lineNumber);
                 setAcceptedCommand(condition);
 
             if (isAcceptedCommand)
@@ -242,6 +217,55 @@ namespace GraphicsAssignment
             {
                 Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);              
             
+            }
+        }
+
+
+        public void executeWhile(string[] command, int startIndex, int lineNumber)
+        {
+            if (command.Length < 4)
+            {
+                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
+                return;
+            }
+
+            string variable = command[startIndex + 1];
+            string comparisonOperator = command[startIndex + 2];
+            int comparisonValue;
+
+            if (!int.TryParse(command[startIndex + 3], out comparisonValue) && !variables.TryGetValue(command[startIndex + 3], out comparisonValue))
+            {
+                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
+                return;
+            }
+
+            if (variables.TryGetValue(variable, out int variableValue))
+            {
+                bool condition = operatorCheck(command, startIndex,  lineNumber);
+                setAcceptedCommand(condition);
+                                         
+
+                while (isAcceptedCommand && condition)
+                {
+
+                    for (int i = startIndex + 4; i < command.Length; i++)
+                    {
+                        if (command[i] == "endloop" || !isAcceptedCommand)
+                        {
+                            break;
+                        }
+                        parseCommand(command[i], lineNumber);
+                        variables[variable] = variableValue;
+                        condition = operatorCheck(command, startIndex, lineNumber);
+
+                    }
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);
+
             }
         }
 
@@ -270,6 +294,10 @@ namespace GraphicsAssignment
                      Console.WriteLine("You have entered an incorrect command");
                  }
                  */
+                if (commands[0] == "while")
+                {
+                    executeWhile(commands, 0, lineNumber);
+                }   
                 if (commands[0] == "if")
                 {
                     executeIf(commands, 0, lineNumber);
