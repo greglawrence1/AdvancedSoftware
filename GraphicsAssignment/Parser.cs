@@ -12,8 +12,7 @@ namespace GraphicsAssignment
     {
         
         private bool isAcceptedCommand;
-        private Dictionary<string, int> variables;
-        private Dictionary<string, int> loopVariables;
+        private Dictionary<string, int> variables;     
         /// <summary>
         /// creating an instance of the MoveTo class
         /// </summary>
@@ -46,7 +45,7 @@ namespace GraphicsAssignment
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
             this.variables = new Dictionary<string, int>();
-            this.loopVariables = new Dictionary<string, int>();
+          
             
         }
 
@@ -222,9 +221,8 @@ namespace GraphicsAssignment
             
             }
         }
-
-
-        public void executeWhile(string[] command, int startIndex, int lineNumber)
+      
+        public void executeWhi2e(string[] command, int startIndex, int lineNumber)
         {
             if (command.Length < 4)
             {
@@ -246,44 +244,34 @@ namespace GraphicsAssignment
             {
                 bool condition = operatorCheck(command, startIndex, lineNumber);
                 setAcceptedCommand(condition);
-                if(isAcceptedCommand)
+                if (isAcceptedCommand)
                 {
-                    Console.WriteLine("loop");                                  
-                    for (int i = startIndex; i < command.Length; i++)
+                    int i = startIndex + 1;
+                    int initialLoop = variables[variable];
+                    while (i <command.Length && command[i] != "endloop")
                     {
-                        if (command[i] == "endloop" || !isAcceptedCommand)
+                        
+                       Console.WriteLine("parser" + command[i]);
+                        parserCommand(command[i]);
+
+                        if(variables.TryGetValue(variable, out int currentValue))
                         {
-                            Console.WriteLine("break");
-                            break;
+                            initialLoop = currentValue;
                         }
 
-                        if (command[i] == "=")
-                        {
-                            Console.WriteLine("increment");
-                            string[] increment = command[i].Split('=');
-                            if (variables.TryGetValue(increment[0], out int currentLoopValue))
-                            {
-                                variables[increment[0]] = currentLoopValue + 1;
-                            }
-                            else
-                            {
-                                int.TryParse(increment[1], out int currentLoopValue2);
-                                variables[increment[0]] = currentLoopValue2;
-                            }
-                        }
-                            Console.WriteLine("parser");
-                            parseCommand(command[i], lineNumber);                                                                                                                          
+                        i++;
                     }
                     Console.WriteLine("endloop");
+                                                             
                 }
-            }
-            else
-            {
-                Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);
+                else
+                {
+                    Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);
 
+                }  
             }
         }
-      
+
         /// <summary.>
         /// Parses a single command
         /// </summary>
@@ -311,7 +299,7 @@ namespace GraphicsAssignment
                  */
                 if (commands[0] == "while")
                 {
-                    executeWhile(commands, 0, lineNumber);
+                    executeWhi2e(commands, 0, lineNumber);
                 }   
                 if (commands[0] == "if")
                 {
