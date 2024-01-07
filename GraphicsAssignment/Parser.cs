@@ -304,7 +304,24 @@ namespace GraphicsAssignment
                  */
                 if (commands[0] == "repeat")
                 {
-                    repeat(command);                 
+                    //repeat(command);
+                    int repeatCount = int.Parse(commands[1]);
+                    string[] strings = command.Split('\n');
+                    for (int i = 0; i < repeatCount; i++)
+                    {
+                        for (int j = 2; j < strings.Length; j++)
+                        {
+                            parseCommand(strings[j], lineNumber);
+                        }
+                    }
+                    /*for (int i = 0; i < repeatCount; i++)
+                    {
+                        for (int j = 2; j < commands.Length; j++)
+                        {
+                            parseCommand(commands[j], lineNumber);
+                        }
+                    }
+                    */
                 }
                 if (commands[0] == "while")
                 {
