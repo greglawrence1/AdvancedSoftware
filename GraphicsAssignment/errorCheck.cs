@@ -86,6 +86,31 @@ namespace GraphicsAssignment
 
                             }
                         }
+                        else if (firstWord == "rectangle")
+                        {
+                            if(words.Skip(1).ToArray().Length != 2)
+                            {
+                                errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have 2 parameters");
+                                continue;
+                            }
+                            if (!this.variables.ContainsKey(words[1]) || !this.variables.ContainsKey(words[2]))
+                            {
+                                errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have a correct number or variable");
+                                continue;
+                            }
+                            int e;
+                            int f;
+                            if (int.TryParse(words[1], out e) && int.TryParse(words[2], out f))
+                            {
+                                if (e > 200 || e < 0 || f > 200 || f < 0)
+                                {
+                                    errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have a correct number");
+                                    continue;
+                                }
+                            }
+                            
+                                                        
+                        }
                         else if (firstWord == "if")
                         {
                             if (words.Length <= 2)
