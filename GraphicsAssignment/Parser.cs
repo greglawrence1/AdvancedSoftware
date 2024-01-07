@@ -251,31 +251,10 @@ namespace GraphicsAssignment
                     Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
                 }         
         }    
-        public void loop(string command)
-        {
-            String[] commandList = command.Split('\n');
-            int i = 0;
-            while(i < commandList.Length)
-                try
-                {
-                    string currentCommand = commandList[i];
-                    if(currentCommand == "repeat")
-                    {
-                        break;
-                    }
-                    parseCommand(currentCommand, i + 1);
-                    i++;
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
-                }
-        }
-
         public void repeat(string commands)
         {
             String[] commandList = commands.Split('\n');
-            Console.WriteLine("see how many times ran1");
+            //Console.WriteLine("see how many times ran1");
 
             if(commandList[0] == "repeat")
             {
@@ -467,9 +446,31 @@ namespace GraphicsAssignment
                 {
                     try
                     {
-                        int t1 = int.Parse(commands[1]);
-                        int t2 = int.Parse(commands[2]);
-                        int t3 = int.Parse(commands[3]);
+                        if(commands.Length != 4)
+                        {
+                            throw new FormatException("You need to insert three numbers for your triangle error is on line " + lineNumber);
+                        }
+                        int t1;
+                        int t2;
+                        int t3;
+                        if (int.TryParse(commands[1], out t1) && int.TryParse(commands[2], out t2) && int.TryParse(commands[3], out t3))
+                        {
+
+                        }
+                        else if (this.variables.ContainsKey(commands[1]) && this.variables.ContainsKey(commands[2]) && this.variables.ContainsKey(commands[3]))
+                        {
+                            t1 = this.variables[commands[1]];
+                            t2 = this.variables[commands[2]];
+                            t3 = this.variables[commands[3]];
+                        }
+                        else
+                        {
+                            throw new FormatException("You need to insert three numbers" +
+                                " for your triangle error is on line " + lineNumber);
+                        }
+                        //int t1 = int.Parse(commands[1]);
+                        //int t2 = int.Parse(commands[2]);
+                        //int t3 = int.Parse(commands[3]);
 
                         Triangle t = new Triangle(Color.AliceBlue, t1, t2, t3, Filled);
                         t.draw(g, p);

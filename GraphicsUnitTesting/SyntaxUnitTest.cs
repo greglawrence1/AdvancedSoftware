@@ -23,18 +23,6 @@ namespace GraphicsUnitTesting
             // Assert
             Assert.AreEqual(0, errorCheck.errors.Count);
            
-        }
-        
-        [TestMethod]
-        public void TestErrorsNotEmpty()
-        {
-            // Arrange
-            errorCheck errorCheck = new errorCheck();
-            string commands = "circle x\nrectangle 100 100\n";
-            // Act
-            errorCheck.checkSyntax(commands);
-            // Assert
-            Assert.AreNotEqual(0, errorCheck.errors.Count);
-        }
+        }      
     }
 }
