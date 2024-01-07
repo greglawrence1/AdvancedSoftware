@@ -9,9 +9,11 @@ namespace GraphicsAssignment
     public class errorCheck
     {
         private Dictionary<string, int> variables;
+        public List<string> errors = new List<string>();
         public errorCheck()
         {
             this.variables = new Dictionary<string, int>();
+            this.errors = new List<string>();
         }
         public List<string> checkSyntax(string commands)
         {

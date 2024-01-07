@@ -249,10 +249,55 @@ namespace GraphicsAssignment
                 catch(Exception e)
                 {
                     Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
-                }
-            
+                }         
         }    
+        public void loop(string command)
+        {
+            String[] commandList = command.Split('\n');
+            int i = 0;
+            while(i < commandList.Length)
+                try
+                {
+                    string currentCommand = commandList[i];
+                    if(currentCommand == "repeat")
+                    {
+                        break;
+                    }
+                    parseCommand(currentCommand, i + 1);
+                    i++;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
+                }
+        }
 
+        public void repeat(string commands)
+        {
+            String[] commandList = commands.Split('\n');
+            Console.WriteLine("see how many times ran1");
+
+            if(commandList[0] == "repeat")
+            {
+                Console.WriteLine("see how many times ran2");
+                int repeatCount;
+                if (int.TryParse(commandList[1], out repeatCount))
+                {
+                    for (int i = 0; i < repeatCount; i++)
+                    {
+                        for (int j = 2; j < commandList.Length; j++)
+                        {
+                            Console.WriteLine("see how many times ran");
+                            parserCommand(commandList[j]);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You have entered an incorrect repeat statement");
+                }
+            }
+        }
         /// <summary.>
         /// Parses a single command
         /// </summary>
@@ -278,6 +323,10 @@ namespace GraphicsAssignment
                      Console.WriteLine("You have entered an incorrect command");
                  }
                  */
+                if (commands[0] == "repeat")
+                {
+                    repeat(command);                 
+                }
                 if (commands[0] == "while")
                 {
                     executeWhile(command);
