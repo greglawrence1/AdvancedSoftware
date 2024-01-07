@@ -222,55 +222,36 @@ namespace GraphicsAssignment
             }
         }
       
-        public void executeWhi2e(string[] command, int startIndex, int lineNumber)
+        public void executeWhile(string command)
         {
-            if (command.Length < 4)
-            {
-                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
-                return;
-            }
-
-            string variable = command[startIndex + 1];
-            string comparisonOperator = command[startIndex + 2];
-            int comparisonValue;
-
-            if (!int.TryParse(command[startIndex + 3], out comparisonValue) && !variables.TryGetValue(command[startIndex + 3], out comparisonValue))
-            {
-                Console.WriteLine("You have entered an incorrect if statement on linenumber " + lineNumber);
-                return;
-            }
-
-            if (variables.TryGetValue(variable, out int variableValue))
-            {
-                bool condition = operatorCheck(command, startIndex, lineNumber);
-                setAcceptedCommand(condition);
-                if (isAcceptedCommand)
+            String[] commandList = command.Split('\n');
+            int i = 0;
+            while(i < commandList.Length)
+                try
                 {
-                    int i = startIndex + 1;
-                    int initialLoop = variables[variable];
-                    while (i <command.Length && command[i] != "endloop")
+
+                    if(isAcceptedCommand)
                     {
-                        
-                       Console.WriteLine("parser" + command[i]);
-                        parserCommand(command[i]);
+                        string currentCommand = commandList[i];
 
-                        if(variables.TryGetValue(variable, out int currentValue))
+                        if(currentCommand == "endloop")
                         {
-                            initialLoop = currentValue;
+                            break;
                         }
-
-                        i++;
+                        parseCommand(currentCommand, i + 1);
+                       i++;
                     }
-                    Console.WriteLine("endloop");
-                                                             
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);
-
-                }  
-            }
-        }
+                    Console.WriteLine("Error on line " + (i + 1) + ": " + e.Message);
+                }
+            
+        }    
 
         /// <summary.>
         /// Parses a single command
@@ -299,7 +280,7 @@ namespace GraphicsAssignment
                  */
                 if (commands[0] == "while")
                 {
-                    executeWhi2e(commands, 0, lineNumber);
+                    executeWhile(command);
                 }   
                 if (commands[0] == "if")
                 {
@@ -404,8 +385,27 @@ namespace GraphicsAssignment
                 {
                     try
                     {
-                        int q1 = int.Parse(commands[1]);
-                        int q2 = int.Parse(commands[2]);
+                        if(commands.Length != 3)
+                        {
+                            throw new FormatException("You need to insert two numbers for your rectangle error is on line " + lineNumber);
+                        }
+                        int q1;
+                        int q2;
+                        if (int.TryParse(commands[1], out q1) && int.TryParse(commands[2], out q2))
+                        {
+
+                        }
+                        else if (this.variables.ContainsKey(commands[1]) && this.variables.ContainsKey(commands[2]))
+                        {
+                            q1 = this.variables[commands[1]];
+                            q2 = this.variables[commands[2]];
+                        }
+                        else
+                        {
+                            throw new FormatException("You need to insert two numbers for your rectangle error is on line " + lineNumber);
+                        }
+                        //int q1 = int.Parse(commands[1]);
+                        //int q2 = int.Parse(commands[2]);
                         Rectangle r = new Rectangle(Color.AliceBlue, currentPosition.X, currentPosition.Y, q1, q2, Filled);
                         r.draw(g, p);
                     }
