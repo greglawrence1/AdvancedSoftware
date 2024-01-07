@@ -67,12 +67,13 @@ namespace GraphicsAssignment
 
                         if (firstWord == "circle")
                         {
-                            if (words.Skip(1).ToArray().Length != 1)
+                            if (words.Length != 2)
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Circle command must have 1 parameters");
                                 continue;
                             }
-                            if (!this.variables.ContainsKey(words[1]))
+                            int var;
+                            if (!this.variables.ContainsKey(words[1]) && !int.TryParse(words[1], out var))
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Circle command must have a correct number or variable");
                                 continue;
@@ -90,7 +91,7 @@ namespace GraphicsAssignment
                         }
                         else if (firstWord == "rectangle")
                         {
-                            if(words.Skip(1).ToArray().Length != 2)
+                            if (words.Length != 2)
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have 2 parameters");
                                 continue;
@@ -110,8 +111,31 @@ namespace GraphicsAssignment
                                     continue;
                                 }
                             }
-                            
-                                                        
+                        }
+                        else if (firstWord == "triangle")
+                        {
+                            if (words.Skip(1).ToArray().Length != 3)
+                            {
+                            }
+                            errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have 3 parameters");
+                            continue;
+
+                            if (!this.variables.ContainsKey(words[1]) || !this.variables.ContainsKey(words[2]) || !this.variables.ContainsKey(words[3]))
+                            {
+                                errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have a correct number or variable");
+                                continue;
+                            }
+                            int h;
+                            int x;
+                            int g;
+                            if (int.TryParse(words[1], out h) && int.TryParse(words[2], out x) && int.TryParse(words[3], out g))
+                            {
+                                if (h > 640 || h < 0 || i > 640 || i < 0 || g > 640 || g < 0)
+                                {
+                                    errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have a correct number");
+                                    continue;
+                                }
+                            }
                         }
                         else if (firstWord == "if")
                         {
