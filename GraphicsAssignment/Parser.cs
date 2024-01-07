@@ -13,6 +13,7 @@ namespace GraphicsAssignment
         
         private bool isAcceptedCommand;
         private Dictionary<string, int> variables;
+        private Dictionary<string, int> loopVariables;
         /// <summary>
         /// creating an instance of the MoveTo class
         /// </summary>
@@ -45,6 +46,7 @@ namespace GraphicsAssignment
             this.currentPosition = new Point(0, 0);
             p = PenSort.GetStarterPen();
             this.variables = new Dictionary<string, int>();
+            this.loopVariables = new Dictionary<string, int>();
             
         }
 
@@ -201,19 +203,21 @@ namespace GraphicsAssignment
 
             if (isAcceptedCommand)
                 {
-                    
-                    for(int i = startIndex + 4; i < command.Length; i++)
+                    Console.WriteLine("you made it to the isaccepted");
+                    for(int i = startIndex; i < command.Length; i++)
                     {
                         if (command[i] == "endif" || !isAcceptedCommand)
-                        {
+                        {                          
                             break;
                         }
+                        Console.WriteLine("you made it to the parser");
                         parseCommand(command[i], lineNumber);
                     }
                 }
             }
             else
             {
+                Console.WriteLine("no longer accepted");
                 Console.WriteLine("You have entered an incorrect variable on linenumber " + lineNumber);              
             
             }
@@ -240,28 +244,37 @@ namespace GraphicsAssignment
 
             if (variables.TryGetValue(variable, out int variableValue))
             {
-                                                      
-                while (isAcceptedCommand && operatorCheck(command, startIndex, lineNumber))
+                bool condition = operatorCheck(command, startIndex, lineNumber);
+                setAcceptedCommand(condition);
+                if(isAcceptedCommand)
                 {
-
-                    for (int i = startIndex + 4; i < command.Length; i++)
+                    Console.WriteLine("loop");                                  
+                    for (int i = startIndex; i < command.Length; i++)
                     {
                         if (command[i] == "endloop" || !isAcceptedCommand)
                         {
+                            Console.WriteLine("break");
                             break;
                         }
-                        parseCommand(command[i], lineNumber);
-                        if(variables.TryGetValue(variable, out variableValue))
-                        {
-                            variables[variable] = variableValue;
-                        }
-                    }
-                    
-                    if (!isAcceptedCommand)
-                    {
-                        break;
-                    }
 
+                        if (command[i] == "=")
+                        {
+                            Console.WriteLine("increment");
+                            string[] increment = command[i].Split('=');
+                            if (variables.TryGetValue(increment[0], out int currentLoopValue))
+                            {
+                                variables[increment[0]] = currentLoopValue + 1;
+                            }
+                            else
+                            {
+                                int.TryParse(increment[1], out int currentLoopValue2);
+                                variables[increment[0]] = currentLoopValue2;
+                            }
+                        }
+                            Console.WriteLine("parser");
+                            parseCommand(command[i], lineNumber);                                                                                                                          
+                    }
+                    Console.WriteLine("endloop");
                 }
             }
             else
@@ -270,7 +283,7 @@ namespace GraphicsAssignment
 
             }
         }
-
+      
         /// <summary.>
         /// Parses a single command
         /// </summary>
