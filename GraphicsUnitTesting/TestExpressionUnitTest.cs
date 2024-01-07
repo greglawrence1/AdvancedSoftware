@@ -9,18 +9,18 @@ using GraphicsAssignment;
 namespace GraphicsUnitTesting
 {
     [TestClass]
-    public class VariableUnitTest
-    {      
+    public class TestExpressionUnitTest
+    {
         [TestMethod]
-        public void TestVariableAssigment()
+        public void TestExpression()
         {
             // Arrange        
             Parser parser = new Parser(Graphics.FromImage(new Bitmap(640, 480)));
             //Act
-            parser.parseCommand("TestCommand = 10", 1);
+            parser.parseCommand("TestCommand2 = 10 + 20", 1);
             //Assert
-            Assert.AreEqual(10, parser.variables["TestCommand"]);
-            Assert.IsTrue(parser.variables.ContainsKey("TestCommand"));
+            Assert.AreEqual(30, parser.variables["TestCommand2"]);
+            Assert.IsTrue(parser.variables.ContainsKey("TestCommand2"));
         }
     }
 }
