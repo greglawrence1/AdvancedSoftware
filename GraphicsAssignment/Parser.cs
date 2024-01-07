@@ -12,7 +12,7 @@ namespace GraphicsAssignment
     {
         
         private bool isAcceptedCommand;
-        private Dictionary<string, int> variables;     
+        public Dictionary<string, int> variables;     
         /// <summary>
         /// creating an instance of the MoveTo class
         /// </summary>
