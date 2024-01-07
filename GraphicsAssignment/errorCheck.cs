@@ -91,12 +91,14 @@ namespace GraphicsAssignment
                         }
                         else if (firstWord == "rectangle")
                         {
-                            if (words.Length != 2)
+                            if (words.Length != 3)
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have 2 parameters");
                                 continue;
                             }
-                            if (!this.variables.ContainsKey(words[1]) || !this.variables.ContainsKey(words[2]))
+                            int var;
+                            int var2;
+                            if (!this.variables.ContainsKey(words[1]) && !this.variables.ContainsKey(words[2]) && !int.TryParse(words[1], out var) && !int.TryParse(words[2] , out var2)) 
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Rectangle command must have a correct number or variable");
                                 continue;
@@ -114,13 +116,16 @@ namespace GraphicsAssignment
                         }
                         else if (firstWord == "triangle")
                         {
-                            if (words.Skip(1).ToArray().Length != 3)
+                            if (words.Length != 4)
                             {
-                            }
-                            errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have 3 parameters");
-                            continue;
 
-                            if (!this.variables.ContainsKey(words[1]) || !this.variables.ContainsKey(words[2]) || !this.variables.ContainsKey(words[3]))
+                                errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have 3 parameters");
+                                continue;
+                            }
+                            int var1;
+                            int var2;
+                            int var3;
+                            if (!this.variables.ContainsKey(words[1]) && !this.variables.ContainsKey(words[2]) && !this.variables.ContainsKey(words[3]) && !int.TryParse(words[1], out var1) && !int.TryParse(words[2], out var2) && !int.TryParse(words[3], out var3))
                             {
                                 errors.Add("Error on line " + (i + 1) + ": " + "Triangle command must have a correct number or variable");
                                 continue;
